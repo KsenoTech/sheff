@@ -1,0 +1,116 @@
+.User {
+    font-size: large;
+    border-top: 1px solid rgb(255, 0, 255); /* Линия сверху */
+    padding-top: 10px; /* Добавляем небольшой верхний отступ */
+    
+}
+
+/* Центрирование контейнера пользователей */
+.user-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 20px; /* Добавляем отступы по бокам для масштабирования */
+  box-sizing: border-box; /* Учитываем padding в общей ширине элемента */
+}
+
+.user-card {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  width: calc(33.33% - 20px); /* Adjust based on your layout */
+}
+
+.user-info {
+  margin-bottom: 10px;
+}
+
+.provided-services {
+  margin-bottom: 10px;
+}
+
+.user-actions button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Центрирование содержимого формы создания пользователя */
+.user-create-container {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 600px; /* Максимальная ширина контейнера */
+  margin: 20px auto; /* Центрируем по горизонтали */
+  box-sizing: border-box; /* Учитываем padding в общей ширине элемента */
+}
+
+.user-create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-create-form label {
+  margin-bottom: 5px;
+}
+
+.user-create-form input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.user-create-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-create-form button:hover {
+  background-color: #0056b3;
+}
+
+
+.container {
+  text-align: center;
+}
+
+.user-container h3 {
+  width: 100%;
+  text-align: center;
+}
+
+/* Центрирование контейнера карточек */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto; /* Центрируем по горизонтали и добавляем отступ сверху и снизу */
+  max-width: 1200px; /* Максимальная ширина контейнера */
+  padding: 0 20px; /* Добавляем отступы по бокам для масштабирования */
+  box-sizing: border-box; /* Учитываем padding в общей ширине элемента */
+}
+
+.card {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 200px; /* Ширина карточки */
+}

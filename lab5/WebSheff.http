@@ -1,0 +1,6 @@
+@WebSheff_HostAddress = http://localhost:5168
+
+GET {{WebSheff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
