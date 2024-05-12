@@ -102,7 +102,7 @@
 //        {
 //            entity.HasKey(e => e.Id).HasName("PK_Type_of_Service");
 
-//            entity.ToTable("Provided_Service");
+//            entity.ToTable("ProvidedService");
 
 //            entity.Property(e => e.CostOfM).HasColumnName("cost_of_m");
 //            entity.Property(e => e.CostOfM2).HasColumnName("cost_of_m2");
@@ -127,7 +127,7 @@
 //                    r => r.HasOne<ProvidedService>().WithMany()
 //                        .HasForeignKey("IdProvidedService")
 //                        .OnDelete(DeleteBehavior.ClientSetNull)
-//                        .HasConstraintName("FK_SmetaProvidedService_Provided_Service"),
+//                        .HasConstraintName("FK_SmetaProvidedService_ProvidedService"),
 //                    l => l.HasOne<Smetum>().WithMany()
 //                        .HasForeignKey("IdSmeta")
 //                        .OnDelete(DeleteBehavior.ClientSetNull)
@@ -183,7 +183,7 @@
 //                    r => r.HasOne<ProvidedService>().WithMany()
 //                        .HasForeignKey("TypeOfService")
 //                        .OnDelete(DeleteBehavior.ClientSetNull)
-//                        .HasConstraintName("FK_VidRabot_Provided_Service"),
+//                        .HasConstraintName("FK_VidRabot_ProvidedService"),
 //                    l => l.HasOne<User>().WithMany()
 //                        .HasForeignKey("IdExecutor")
 //                        .HasConstraintName("FK_VidRabot_User1"),

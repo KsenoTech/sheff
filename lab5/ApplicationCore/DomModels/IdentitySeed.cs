@@ -30,8 +30,9 @@ namespace WebSheff.ApplicationCore.DomModels
             string adminEmail = "klmych@mail.ru";
             string adminAddress = "CanYouFindMe?";
             string adminTelephoneNumber = "89203776291";
-         
-            if (await userManager.FindByNameAsync(adminEmail) == null)
+
+                   
+            if (await userManager.FindByNameAsync(adminUserName) == null)
             {
                 User admin = new User
                 {
@@ -65,7 +66,7 @@ namespace WebSheff.ApplicationCore.DomModels
             string userAddress = "CanYouFindMe?";
             string userTelephoneNumber = "81234567890";
 
-            if (await userManager.FindByNameAsync(userEmail) == null)
+            if (await userManager.FindByEmailAsync(userEmail) == null)
             {
                 User user = new User
                 {

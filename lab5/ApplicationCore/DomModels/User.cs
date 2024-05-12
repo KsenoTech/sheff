@@ -58,13 +58,13 @@ public partial class User : IdentityUser
     public int AccessFailedCount { get; set; }
 
 
-    public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; } = new List<AspNetUserClaim>();
-    [NotMapped]
-    public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; } = new List<AspNetUserLogin>();
+    //public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; } = new List<AspNetUserClaim>();
+    //[NotMapped]
+    //public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; } = new List<AspNetUserLogin>();
 
-    public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; } = new List<AspNetUserToken>();
+    //public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; } = new List<AspNetUserToken>();
 
-    public virtual ICollection<AspNetRole> Roles { get; set; } = new List<AspNetRole>();
+    //public virtual ICollection<AspNetRole> Roles { get; set; } = new List<AspNetRole>();
 
     public virtual ICollection<ProvidedService> TypeOfServices { get; set; } = new List<ProvidedService>();
 
@@ -72,6 +72,7 @@ public partial class User : IdentityUser
 
     [NotMapped]
     public virtual ICollection<VidRabot> VidRabots { get; set; } = new List<VidRabot>();
+
     [NotMapped]
     public virtual ICollection<ProvidedService> ProvidedServices { get; set; } = new List<ProvidedService>();
 
