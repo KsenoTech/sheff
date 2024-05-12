@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.ApplicationCore.Interfaces.Services;
 
@@ -15,6 +15,6 @@ public interface IVidRabotService
         int Type_of_Service
         );
     bool UpdateVidRabot(VidRabot p);
-    bool DeleteProvidedService(int id);
+    bool DeleteVidRabot(int id);
 
 }

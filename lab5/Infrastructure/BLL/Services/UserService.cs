@@ -1,6 +1,6 @@
 ﻿using WebSheff.ApplicationCore.Interfaces.Repositories;
 using WebSheff.ApplicationCore.Interfaces.Services;
-using WebSheff.ApplicationCore.Models;
+using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.Infrastructure.BLL.Services
 {
@@ -17,7 +17,7 @@ namespace WebSheff.Infrastructure.BLL.Services
         {
             return db.Users.GetList().ToList();
         }
-        public User GetUser(int Id)
+        public User GetUser(string Id)
         {
             return db.Users.GetItem(Id);
         }
@@ -36,7 +36,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 Name = name,
                 Surname = surname,
                 MiddleName = middlename,
-                Email = email,
+                EMail = email,
                 Password = password,
                 PasswordConfirm = password,
                 Address = address,
@@ -52,15 +52,53 @@ namespace WebSheff.Infrastructure.BLL.Services
             return false;
         }
 
+        public bool UpdateUser(User p)
+        {
+            User ph = db.Users.GetItem(p.Id);
+
+            if (ph != null)
+            {
+                ph.Id = p.Id;
+                ph.Name = p.Name;
+                ph.Surname = p.Surname;
+                ph.MiddleName = p.MiddleName;
+                ph.Password = p.Password;
+                ph.PasswordConfirm = p.PasswordConfirm;
+                ph.Address = p.Address;
+                ph.EMail = p.EMail;
+                ph.TelephoneNumber = p.TelephoneNumber;
+ 
+                if (db.Users.Update(ph))
+                {
+                    Save();
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        public bool DeleteUser(string id)
+        {
+            User p = db.Users.GetItem(id);
+            if (p != null)
+            {
+                var userDelete = db.Users.Delete(p.Id);
+
+                if (userDelete)
+                {
+                    Save();
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
         public bool Save()
         {
             if (db.Save() > 0) return true;
             return false;
-        }
-
-          bool IUserService.UpdateUser(User p)
-        {
-            throw new NotImplementedException();
         }
     }
 }

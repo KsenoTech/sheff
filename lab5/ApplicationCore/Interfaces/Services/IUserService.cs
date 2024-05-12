@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.ApplicationCore.Interfaces.Services
 {
@@ -8,7 +8,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
     public interface IUserService
     {
         List<User> GetAllUsers();
-        User GetUser(int Id);
+        User GetUser(string Id);
         bool CreateUser(
             string surname,
             string name,
@@ -18,6 +18,6 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
             string address,
             string telephone);
         bool UpdateUser(User p);
-
+        bool DeleteUser(string id);
     }
 }

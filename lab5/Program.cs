@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebSheff.Data;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
-using WebSheff.ApplicationCore.Models;
+using WebSheff.ApplicationCore.DomModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SheffContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SheffContext>().AddDefaultTokenProviders();
 builder.Services.AddDbContext<SheffContext>();
 
 builder.Services.AddControllers();
@@ -68,10 +68,10 @@ var app = builder.Build();
 
     using (var scope = app.Services.CreateScope())
     {
-        //var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
+        var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
         await IdentitySeed.CreateUserRoles(scope.ServiceProvider);
 
-        //await SheffContextSeed.SeedAsync(sheffContext);
+        await SheffContextSeed.SeedAsync(sheffContext);
     }
 
 

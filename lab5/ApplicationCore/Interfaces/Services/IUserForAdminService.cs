@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.ApplicationCore.Interfaces.Services
 {

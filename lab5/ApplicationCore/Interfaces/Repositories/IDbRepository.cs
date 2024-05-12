@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.ApplicationCore.Interfaces.Repositories
 {
@@ -7,7 +7,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Repositories
         IRepository<User> Users { get; }
         IRepository<ProvidedService> ProvidedServices { get;}
         IRepository<VidRabot> VidRabots { get;}
-        IRepository<Smeta> Smetas { get; }
+        IRepository<Smetum> Smetas { get; }
         int Save();
     }
 }

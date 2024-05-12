@@ -1,8 +1,9 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebSheff.Infrastructure.Extensions;
 
 namespace WebSheff.Controllers
 {
@@ -33,7 +34,7 @@ namespace WebSheff.Controllers
                     Surname = model.Surname,
                     Name = model.Name,
                     MiddleName = model.MiddleName,
-                    Email = model.Email,
+                    EMail = model.Email,
                     Address = model.Address,
                     TelephoneNumber = model.TelephoneNumber,
                     UserName = model.UserName,

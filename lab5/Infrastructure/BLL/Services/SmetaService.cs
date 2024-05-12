@@ -1,6 +1,6 @@
 ﻿using WebSheff.ApplicationCore.Interfaces.Repositories;
 using WebSheff.ApplicationCore.Interfaces.Services;
-using WebSheff.ApplicationCore.Models;
+using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.Infrastructure.BLL.Services
 {
@@ -17,20 +17,22 @@ namespace WebSheff.Infrastructure.BLL.Services
             _providedservice = providedservice;
         }
 
-        List<Smeta> ISmetaService.GetAllSmetas()
+        List<Smetum> ISmetaService.GetAllSmetas()
         {
-            throw new NotImplementedException();
+            return db.Smetas.GetList();
         }
 
-        public Smeta GetSmeta(int id)
+        public Smetum GetSmeta(int id)
         {
-            throw new NotImplementedException();
+            return db.Smetas.GetItem(id);
         }
 
-        public Smeta MakeSmeta(User client, User executor, ProvidedService providedService, DateTime dataTime)
+        public Smetum MakeSmeta(
+            User client, 
+            User executor, 
+            ProvidedService providedService, 
+            DateTime dataTime)
         {
-            //throw new NotImplementedException();
-
             #region Проверка
             var providedservicenew = _providedservice.GetProvidedService(providedService.Id);
 
@@ -46,7 +48,6 @@ namespace WebSheff.Infrastructure.BLL.Services
                 return null;
             }
 
-
             var clientnew = _clientservice.GetUser(client.Id);
 
             if (clientnew == null)
@@ -55,13 +56,27 @@ namespace WebSheff.Infrastructure.BLL.Services
             }
             #endregion
 
-            Smeta smeta = new Smeta()
+            Smetum smeta = new Smetum()
             {
-                Client = client,  
-
+                Client = client,
+                Executor = executor,
+                SmProvidedService = providedservicenew
             };
-        }
 
+            var smetaCreated = db.Smetas.Create(smeta);
+            if (smetaCreated)
+            {
+                executornew.ProvidedServices.Add(providedservicenew);
+                clientnew.ProvidedServices.Add(providedservicenew);
+               
+
+                if (db.Save() > 0)
+                {
+                    return GetSmeta(smeta.Id);
+                }
+            }
+            return null;
+        }
 
     }
 }

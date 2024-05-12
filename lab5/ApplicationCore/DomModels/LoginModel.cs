@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebSheff.ApplicationCore.Models
+namespace WebSheff.ApplicationCore.DomModels
 {
     public class LoginModel
     {

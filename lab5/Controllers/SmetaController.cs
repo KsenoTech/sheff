@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebSheff.ApplicationCore.Interfaces.Services;
-using WebSheff.ApplicationCore.Models;
+using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.Controllers
 {
@@ -18,14 +18,14 @@ namespace WebSheff.Controllers
 
         // GET: api/<SmetaController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Smeta>>> GetSmetas()
+        public async Task<ActionResult<IEnumerable<Smetum>>> GetSmetas()
         {
             return await Task.Run(_smetaService.GetAllSmetas);
         }
 
         // GET api/<SmetaController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Smeta>> GetSmeta(int id)
+        public async Task<ActionResult<Smetum>> GetSmeta(int id)
         {
             var order = await Task.Run(() => _smetaService.GetSmeta(id));
             if (order == null)
@@ -37,7 +37,7 @@ namespace WebSheff.Controllers
 
         // POST api/<SmetaController>
         [HttpPost]
-        public async Task<ActionResult<Smeta>> PostSmeta(Smeta order)
+        public async Task<ActionResult<Smetum>> PostSmeta(Smetum smeta)
         {
             if (!ModelState.IsValid)
             {
@@ -45,14 +45,14 @@ namespace WebSheff.Controllers
             }
 
             var orderCreated = await Task.Run(() => _smetaService.MakeSmeta(
-                order.IdClient,
-                order.IdExecutor,
-                order.IdProvededServices,
+                smeta.Client,
+                smeta.Executor,
+                smeta.SmProvidedService,
                 DateTime.Now));
 
             if (orderCreated != null)
             {
-                return CreatedAtAction("PostSmeta", new { id = order.Id }, order);
+                return CreatedAtAction("PostSmeta", new { id = smeta.Id }, smeta);
             }
 
             return BadRequest();
@@ -66,7 +66,7 @@ namespace WebSheff.Controllers
 
         // DELETE api/<SmetaController>/5
         [HttpDelete("{id}")]
-        private void Delete(int id)
+        private void Delete(string id)
         {
         }
     }

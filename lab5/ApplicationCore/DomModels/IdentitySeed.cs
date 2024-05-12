@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WebSheff.ApplicationCore.Models
+namespace WebSheff.ApplicationCore.DomModels
 {
     public static class IdentitySeed
     {
@@ -38,7 +38,7 @@ namespace WebSheff.ApplicationCore.Models
                     Surname = adminSurname,
                     Name = adminName,
                     MiddleName = adminMiddleName,
-                    Email = adminEmail,
+                    EMail = adminEmail,
                     Address = adminAddress,
                     TelephoneNumber = adminTelephoneNumber,
                     UserName = adminUserName,
@@ -72,7 +72,7 @@ namespace WebSheff.ApplicationCore.Models
                     Surname = userSurname,
                     Name = userName,
                     MiddleName = userMiddleName,
-                    Email = userEmail,
+                    EMail = userEmail,
                     Address = userAddress,
                     TelephoneNumber = userTelephoneNumber,
                     UserName = userUserName,

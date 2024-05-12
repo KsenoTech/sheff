@@ -1,4 +1,4 @@
-﻿namespace WebSheff.ApplicationCore.Models;
+﻿namespace WebSheff.ApplicationCore.DomModels;
 
 public partial class ProvidedService
 {
@@ -14,5 +14,5 @@ public partial class ProvidedService
 
     public virtual ICollection<User> IdExecutors { get; set; } = new List<User>();
 
-    public virtual ICollection<Smeta> IdSmeta { get; set; } = new List<Smeta>();
+    public virtual ICollection<Smetum> IdSmeta { get; set; } = new List<Smetum>();
 }

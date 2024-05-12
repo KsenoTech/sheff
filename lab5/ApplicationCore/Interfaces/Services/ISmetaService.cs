@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.ApplicationCore.Interfaces.Services
 {
@@ -8,7 +8,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// Создать заказ
         /// </summary>
         /// <returns></returns>
-        Smeta MakeSmeta(           
+        Smetum MakeSmeta(           
            User client,
            User executor,
            ProvidedService providedService,
@@ -19,13 +19,13 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// Получить все заказы
         /// </summary>
         /// <returns></returns>
-        List<Smeta> GetAllSmetas();
+        List<Smetum> GetAllSmetas();
 
         /// <summary>
         /// Получить смету
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Smeta GetSmeta(int id);
+        Smetum GetSmeta(int id);
     }
 }

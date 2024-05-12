@@ -1,4 +1,4 @@
-﻿using WebSheff.ApplicationCore.Models;
+﻿using WebSheff.ApplicationCore.DomModels;
 
 namespace WebSheff.Data
 {
@@ -11,7 +11,7 @@ namespace WebSheff.Data
                 context.Database.EnsureCreated();
 
                 // Если в таблицах уже есть данные, то выходим
-                if (context.Users.Any() || context.ProvidedServices.Any() || context.Smetas.Any())
+                if (context.Useras.Any() || context.ProvidedServices.Any() || context.Smeta.Any())
                 {
                     return;
                 }
@@ -32,37 +32,35 @@ namespace WebSheff.Data
             {
                 new User
                 {
-                    Id = 1,
                     Name = "John",
                     Surname = "Doe",
-                    Email = "john@example.com",
+                    UserName =  "John",
+                    EMail = "john@example.com",
                     Password = "password123",
                     Address = "123 Main St",
                     TelephoneNumber = "123-456-7890",
                     KolvoZakazov = 0,
                     Rating = 4.5,
                     MiddleName = "Middle"
-                    //Login = "johndoe"
                 },
                 new User
                 {
-                    Id = 2,
                     Name = "Alice",
                     Surname = "Smith",
-                    Email = "alice@example.com",
+                    UserName = "Alice",
+                    EMail = "alice@example.com",
                     Password = "password456",
                     Address = "456 Elm St",
                     TelephoneNumber = "456-789-0123",
                     KolvoZakazov = 0,
                     Rating = 4.0,
                     MiddleName = "Marie"
-                   // Login = "alicesmith"
                 }
             };
 
             foreach (var user in users)
             {
-                context.Users.Add(user);
+                context.Useras.Add(user);
             }
 
             await context.SaveChangesAsync();
@@ -100,24 +98,18 @@ namespace WebSheff.Data
 
         private static async Task SeedSmetaAsync(SheffContext context)
         {
-            var smetas = new Smeta[]
+            var smetas = new Smetum[]
             {
-                new Smeta
-                {
-                    Id = 1,
-                    IdClient = 1,
-                    IdExecutor = 2,
+                new Smetum
+                { 
                     TimeOrder = DateTime.Now,
                     GeneralBudget = 1000,
                     CanIdoIt = true,
                     Description = "Description for Smeta 1",
                     FeedbackText = "Feedback for Smeta 1"
                 },
-                new Smeta
+                new Smetum
                 {
-                    Id = 2,
-                    IdClient = 2,
-                    IdExecutor = 1,
                     TimeOrder = DateTime.Now.AddDays(-1),
                     GeneralBudget = 1500,
                     CanIdoIt = false,
@@ -128,7 +120,7 @@ namespace WebSheff.Data
 
             foreach (var smeta in smetas)
             {
-                context.Smetas.Add(smeta);
+                context.Smeta.Add(smeta);
             }
 
             await context.SaveChangesAsync();
