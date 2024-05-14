@@ -64,33 +64,34 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 
-var app = builder.Build();
+    var app = builder.Build();
 
     using (var scope = app.Services.CreateScope())
     {
         var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
-        await IdentitySeed.CreateUserRoles(scope.ServiceProvider);
+
 
         await SheffContextSeed.SeedAsync(sheffContext);
+        await IdentitySeed.CreateUserRoles(scope.ServiceProvider);
     }
 
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
-    app.UseCors();
+app.UseCors();
 
-    app.UseAuthentication();
-    app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 
-    app.MapControllers();
+app.MapControllers();
 
-    app.Logger.LogInformation("Starting the app");
+app.Logger.LogInformation("Starting the app");
 
-    app.Run();
+app.Run();

@@ -37,7 +37,7 @@ namespace WebSheff.Controllers
                     EMail = model.Email,
                     Address = model.Address,
                     TelephoneNumber = model.TelephoneNumber,
-                    UserName = model.UserName,
+                    UserLogin = model.UserName,
                     Password = model.Password,
                     PasswordConfirm = model.PasswordConfirm
                 };
@@ -51,7 +51,7 @@ namespace WebSheff.Controllers
                     await _userManager.AddToRoleAsync(user, "user");
                     // Установка куки
                     await _signInManager.SignInAsync(user, false);
-                    return Ok(new { message = "Добавлен новый пользователь: " + user.UserName });
+                    return Ok(new { message = "Добавлен новый пользователь: " + user.UserLogin });
                 }
                 else
                 {
@@ -133,7 +133,7 @@ namespace WebSheff.Controllers
             }
             // Удаление куки
             await _signInManager.SignOutAsync();
-            return Ok(new { message = "Выполнен выход", userName = usr.UserName });
+            return Ok(new { message = "Выполнен выход", userName = usr.UserLogin });
         }
 
 
@@ -150,7 +150,7 @@ namespace WebSheff.Controllers
             //return Ok(new { message = "Сессия активна", userName = usr.UserName });
             IList<string> roles = await _userManager.GetRolesAsync(usr);
             string? userRole = roles.FirstOrDefault();
-            return Ok(new { message = "Сессия активна", userName = usr.UserName, userRole });
+            return Ok(new { message = "Сессия активна", userName = usr.UserLogin, userRole });
 
         }
         private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);

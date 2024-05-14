@@ -166,7 +166,7 @@ public partial class SheffContext : IdentityDbContext<User>
             entity.Property(e => e.Rating).HasColumnName("rating");
             entity.Property(e => e.Surname).HasColumnName("surname");
             entity.Property(e => e.TelephoneNumber).HasColumnName("telephone_number");
-            entity.Property(e => e.UserName).HasMaxLength(256);
+            entity.Property(e => e.UserLogin).HasMaxLength(256);
 
             //entity.HasMany(d => d.Roles).WithMany(p => p.Useras)
             //    .UsingEntity<Dictionary<string, object>>(

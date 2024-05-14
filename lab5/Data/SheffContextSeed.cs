@@ -34,7 +34,7 @@ namespace WebSheff.Data
                 {
                     Name = "John",
                     Surname = "Doe",
-                    UserName =  "John",
+                    UserLogin =  "John",
                     EMail = "john@example.com",
                     Password = "password123",
                     Address = "123 Main St",
@@ -47,7 +47,7 @@ namespace WebSheff.Data
                 {
                     Name = "Alice",
                     Surname = "Smith",
-                    UserName = "Alice",
+                    UserLogin = "Alice",
                     EMail = "alice@example.com",
                     Password = "password456",
                     Address = "456 Elm St",

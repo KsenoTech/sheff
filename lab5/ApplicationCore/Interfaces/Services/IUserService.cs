@@ -8,7 +8,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
     public interface IUserService
     {
         List<User> GetAllUsers();
-        User GetUser(string Id);
+        User GetUser(int Id);
         bool CreateUser(
             string surname,
             string name,
@@ -18,6 +18,6 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
             string address,
             string telephone);
         bool UpdateUser(User p);
-        bool DeleteUser(string id);
+        bool DeleteUser(int id);
     }
 }

@@ -17,7 +17,7 @@ namespace WebSheff.Infrastructure.BLL.Services
         {
             return db.Users.GetList().ToList();
         }
-        public User GetUser(string Id)
+        public User GetUser(int Id)
         {
             return db.Users.GetItem(Id);
         }
@@ -78,7 +78,7 @@ namespace WebSheff.Infrastructure.BLL.Services
             return false;
         }
 
-        public bool DeleteUser(string id)
+        public bool DeleteUser(int id)
         {
             User p = db.Users.GetItem(id);
             if (p != null)

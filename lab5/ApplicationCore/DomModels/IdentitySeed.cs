@@ -18,9 +18,13 @@ namespace WebSheff.ApplicationCore.DomModels
             {
                 await roleManager.CreateAsync(new IdentityRole("user"));
             }
+            if (await roleManager.FindByNameAsync("executor") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole("executor"));
+            }
 
             // Создание Администратора
-            string adminUserName = "klmadmin";
+            string adminUserLogin = "klmadmin";
             string adminPassword = "SWAGger2985!?(-_-)";
 
             string adminSurname = "Ksenofontov";
@@ -32,7 +36,7 @@ namespace WebSheff.ApplicationCore.DomModels
             string adminTelephoneNumber = "89203776291";
 
                    
-            if (await userManager.FindByNameAsync(adminUserName) == null)
+            if (await userManager.FindByEmailAsync(adminUserLogin) == null)
             {
                 User admin = new User
                 {
@@ -42,7 +46,8 @@ namespace WebSheff.ApplicationCore.DomModels
                     EMail = adminEmail,
                     Address = adminAddress,
                     TelephoneNumber = adminTelephoneNumber,
-                    UserName = adminUserName,
+                    UserLogin = adminUserLogin,
+                    UserName = adminUserLogin,
                     Password = adminPassword,
                     PasswordConfirm = adminPassword
                 };
@@ -66,7 +71,7 @@ namespace WebSheff.ApplicationCore.DomModels
             string userAddress = "CanYouFindMe?";
             string userTelephoneNumber = "81234567890";
 
-            if (await userManager.FindByEmailAsync(userEmail) == null)
+            if (await userManager.FindByEmailAsync(adminEmail) == null)
             {
                 User user = new User
                 {
@@ -76,7 +81,7 @@ namespace WebSheff.ApplicationCore.DomModels
                     EMail = userEmail,
                     Address = userAddress,
                     TelephoneNumber = userTelephoneNumber,
-                    UserName = userUserName,
+                    UserLogin = userUserName,
                     Password = userPassword,
                     PasswordConfirm = userPassword
                 };

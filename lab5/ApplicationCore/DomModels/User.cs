@@ -8,7 +8,7 @@ namespace WebSheff.ApplicationCore.DomModels;
 public partial class User : IdentityUser
 {
 
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     public string? Surname { get; set; }
 
@@ -31,7 +31,7 @@ public partial class User : IdentityUser
 
     public double? Rating { get; set; }
 
-    public string? UserName { get; set; }
+    public string? UserLogin { get; set; }
 
     public string? NormalizedUserName { get; set; }
 

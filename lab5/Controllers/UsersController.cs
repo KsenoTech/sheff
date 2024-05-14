@@ -50,7 +50,7 @@ namespace WebSheff.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
             {
@@ -78,7 +78,7 @@ namespace WebSheff.Controllers
             return NoContent();
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(int id)
         {
             return _context.Useras.Any(e => e.Id == id);
         }
@@ -106,7 +106,7 @@ namespace WebSheff.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("Name_f_{id}")]
-        public string Get(string id)
+        public string Get(int id)
         {
             // Здесь вы можете использовать идентификатор для получения конкретного пользователя из вашей базы данных
             var user = _context.Useras.FirstOrDefault(u => u.Id == id);
