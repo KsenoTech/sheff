@@ -12,16 +12,6 @@ public partial class SheffContext : IdentityDbContext<User>
         Configuration = configuration;
     }
 
-    //public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-
-    //public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
-
-    //public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-
-    //public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-
-    //public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<ProvidedService> ProvidedServices { get; set; }
@@ -37,44 +27,6 @@ public partial class SheffContext : IdentityDbContext<User>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //modelBuilder.Entity<AspNetRole>(entity =>
-        //{
-        //    entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-        //        .IsUnique()
-        //        .HasFilter("([NormalizedName] IS NOT NULL)");
-
-        //    entity.Property(e => e.Name).HasMaxLength(256);
-        //    entity.Property(e => e.NormalizedName).HasMaxLength(256);
-        //});
-
-        //modelBuilder.Entity<AspNetRoleClaim>(entity =>
-        //{
-        //    entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
-
-        //    entity.HasOne(d => d.Role).WithMany(p => p.AspNetRoleClaims).HasForeignKey(d => d.RoleId);
-        //});
-
-        //modelBuilder.Entity<AspNetUserClaim>(entity =>
-        //{
-        //    entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
-
-        //    entity.HasOne(d => d.User).WithMany(p => p.AspNetUserClaims).HasForeignKey(d => d.UserId);
-        //});
-
-        //modelBuilder.Entity<AspNetUserLogin>(entity =>
-        //{
-        //    //entity.HasNoKey();
-        //    entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
-        //    entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
-        //    entity.HasOne(d => d.User).WithMany(p => p.AspNetUserLogins).HasForeignKey(d => d.UserId);
-        //});
-
-        //modelBuilder.Entity<AspNetUserToken>(entity =>
-        //{
-        //    entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
-
-        //    entity.HasOne(d => d.User).WithMany(p => p.AspNetUserTokens).HasForeignKey(d => d.UserId);
-        //});
 
         modelBuilder.Entity<Order>(entity =>
         {

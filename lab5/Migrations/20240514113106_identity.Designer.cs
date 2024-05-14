@@ -12,8 +12,8 @@ using WebSheff.ApplicationCore.DomModels;
 namespace WebSheff.Migrations
 {
     [DbContext(typeof(SheffContext))]
-    [Migration("20240512171042_Identity")]
-    partial class Identity
+    [Migration("20240514113106_identity")]
+    partial class identity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -376,6 +376,10 @@ namespace WebSheff.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserLogin")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)

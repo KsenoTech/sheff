@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebSheff.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity : Migration
+    public partial class identity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,7 +123,7 @@ namespace WebSheff.Migrations
                     kolvoZakazov = table.Column<int>(type: "int", nullable: true),
                     telephone_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     rating = table.Column<double>(type: "float", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    UserLogin = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
@@ -138,6 +138,7 @@ namespace WebSheff.Migrations
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false),
                     VidRabotId_executor = table.Column<int>(type: "int", nullable: true),
                     VidRabotType_of_Service = table.Column<int>(type: "int", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true)
                 },
                 constraints: table =>

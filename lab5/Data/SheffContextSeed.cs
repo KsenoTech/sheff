@@ -10,15 +10,37 @@ namespace WebSheff.Data
             {
                 context.Database.EnsureCreated();
 
-                // Если в таблицах уже есть данные, то выходим
-                if (context.Useras.Any() || context.ProvidedServices.Any() || context.Smeta.Any())
+                // Если в таблицах уже есть данные, то выходим context.Smeta.Any()
+                if (context.Useras.Any())
                 {
                     return;
                 }
+                else
+                {
+                    await SeedUsersAsync(context);
+                }
 
-                await SeedUsersAsync(context);
-                await SeedProvidedServicesAsync(context);
-                await SeedSmetaAsync(context);
+                if (context.ProvidedServices.Any())
+                {
+                    return;
+                }
+                else
+                {
+                    await SeedProvidedServicesAsync(context);
+                }
+
+                if (context.ProvidedServices.Any())
+                {
+                    return;
+                }
+                else
+                {
+                    await SeedProvidedServicesAsync(context);
+                }
+
+
+
+                //await SeedSmetaAsync(context);
             }
             catch (Exception ex)
             {
@@ -72,7 +94,7 @@ namespace WebSheff.Data
             {
                 new ProvidedService
                 {
-                    Id = 1,
+                    
                     Title = "Service 1",
                     Description = "Description for service 1",
                     CostOfM = 50,
@@ -80,7 +102,7 @@ namespace WebSheff.Data
                 },
                 new ProvidedService
                 {
-                    Id = 2,
+                    
                     Title = "Service 2",
                     Description = "Description for service 2",
                     CostOfM = 60,

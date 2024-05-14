@@ -14,16 +14,18 @@ namespace WebSheff.ApplicationCore.DomModels
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));
             }
+
             if (await roleManager.FindByNameAsync("user") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("user"));
             }
+
             if (await roleManager.FindByNameAsync("executor") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("executor"));
             }
 
-            // Создание Администратора
+            #region Создание Администратора
             string adminUserLogin = "klmadmin";
             string adminPassword = "SWAGger2985!?(-_-)";
 
@@ -34,9 +36,9 @@ namespace WebSheff.ApplicationCore.DomModels
             string adminEmail = "klmych@mail.ru";
             string adminAddress = "CanYouFindMe?";
             string adminTelephoneNumber = "89203776291";
-
-                   
-            if (await userManager.FindByEmailAsync(adminUserLogin) == null)
+            #endregion
+            var existingAdmin = await userManager.FindByEmailAsync(adminEmail);
+            if (existingAdmin == null)
             {
                 User admin = new User
                 {
@@ -51,7 +53,7 @@ namespace WebSheff.ApplicationCore.DomModels
                     Password = adminPassword,
                     PasswordConfirm = adminPassword
                 };
-                //добавить 
+
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {
@@ -59,9 +61,9 @@ namespace WebSheff.ApplicationCore.DomModels
                 }
             }
 
-            // Создание Пользователя
-            string userUserName = "user";
-            string userPassword = "Userr1!";
+            #region Создание Пользователя
+            string userLoginName = "useqr";
+            string userPassword = "User12r1!";
                    
             string userSurname = "Surname";
             string userName = "Name";
@@ -70,8 +72,9 @@ namespace WebSheff.ApplicationCore.DomModels
             string userEmail = "example@mail.ru";
             string userAddress = "CanYouFindMe?";
             string userTelephoneNumber = "81234567890";
-
-            if (await userManager.FindByEmailAsync(adminEmail) == null)
+            #endregion
+            var existingUser = await userManager.FindByEmailAsync(userEmail);
+            if (existingUser == null)
             {
                 User user = new User
                 {
@@ -81,7 +84,8 @@ namespace WebSheff.ApplicationCore.DomModels
                     EMail = userEmail,
                     Address = userAddress,
                     TelephoneNumber = userTelephoneNumber,
-                    UserLogin = userUserName,
+                    UserLogin = userLoginName,
+                    UserName = userLoginName,
                     Password = userPassword,
                     PasswordConfirm = userPassword
                 };

@@ -24,7 +24,12 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SheffContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<User, IdentityRole>(
+    options =>
+    {
+        options.User.RequireUniqueEmail = true;
+    }).AddEntityFrameworkStores<SheffContext>().AddDefaultTokenProviders();
+
 builder.Services.AddDbContext<SheffContext>();
 
 builder.Services.AddControllers();
@@ -64,16 +69,14 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 
-    var app = builder.Build();
+var app = builder.Build();
 
-    using (var scope = app.Services.CreateScope())
-    {
-        var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
-
-
-        await SheffContextSeed.SeedAsync(sheffContext);
-        await IdentitySeed.CreateUserRoles(scope.ServiceProvider);
-    }
+using (var scope = app.Services.CreateScope())
+{
+    var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
+    await SheffContextSeed.SeedAsync(sheffContext);
+    await IdentitySeed.CreateUserRoles(scope.ServiceProvider);
+}
 
 
 // Configure the HTTP request pipeline.
