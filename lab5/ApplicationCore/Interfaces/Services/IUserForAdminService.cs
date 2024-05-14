@@ -14,6 +14,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
             string name,
             string middlename,
             string email,
+            string userLogin,
             string password,
             string address,
             string telephone
@@ -24,6 +25,7 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
             string middlename,
             string email,
             string password,
+            string userLogin,
             string address,
             string telephone,
             int kolvoZakazov,

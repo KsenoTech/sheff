@@ -58,16 +58,16 @@ namespace WebSheff.Controllers
             return BadRequest();
         }
 
-        // PUT api/<SmetaController>/5
-        [HttpPut("{id}")]
-        private void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<SmetaController>/5
+        //[HttpPut("{id}")]
+        //private void PutSmeta(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<SmetaController>/5
-        [HttpDelete("{id}")]
-        private void Delete(string id)
-        {
-        }
+        //// DELETE api/<SmetaController>/5
+        //[HttpDelete("{id}")]
+        //private void DeleteSmeta(string id)
+        //{
+        //}
     }
 }

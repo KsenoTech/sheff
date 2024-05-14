@@ -54,6 +54,7 @@ namespace WebSheff.ApplicationCore.DomModels
         public string Address { get; set; }
 
 
+
         [Required(ErrorMessage = "Поле 'Телефон' обязательно для заполнения")]
         [Phone(ErrorMessage = "Некорректный формат номера телефона")]
         [Display(Name = "Телефон")]

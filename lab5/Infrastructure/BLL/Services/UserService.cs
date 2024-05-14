@@ -27,6 +27,7 @@ namespace WebSheff.Infrastructure.BLL.Services
             string name,
             string middlename,
             string email,
+            string userLogin,
             string password,
             string address,
             string telephone)
@@ -38,6 +39,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 MiddleName = middlename,
                 EMail = email,
                 Password = password,
+                UserLogin = userLogin,
                 //PasswordConfirm = password,
                 Address = address,
                 TelephoneNumber = telephone,

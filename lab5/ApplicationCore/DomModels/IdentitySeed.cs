@@ -52,7 +52,6 @@ namespace WebSheff.ApplicationCore.DomModels
                     UserLogin = adminUserLogin,
                     UserName = adminUserLogin,
                     Password = adminPassword,
-                    //PasswordConfirm = adminPassword,
                     NormalizedEmail = adminEmail,
                     NormalizedUserName = adminUserLogin.ToUpper()
                 };
@@ -91,7 +90,6 @@ namespace WebSheff.ApplicationCore.DomModels
                     UserLogin = userLoginName,
                     UserName = userLoginName,
                     Password = userPassword,
-                    //PasswordConfirm = userPassword,
                     NormalizedEmail = userEmail,
                     NormalizedUserName = userLoginName.ToUpper()
                 };
