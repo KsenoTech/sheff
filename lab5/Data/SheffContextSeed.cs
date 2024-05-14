@@ -57,26 +57,28 @@ namespace WebSheff.Data
                     Name = "John",
                     Surname = "Doe",
                     UserLogin =  "John",
-                    EMail = "john@example.com",
+                    Email = "john@example.com",
                     Password = "password123",
                     Address = "123 Main St",
                     TelephoneNumber = "123-456-7890",
                     KolvoZakazov = 0,
                     Rating = 4.5,
-                    MiddleName = "Middle"
+                    MiddleName = "Middle",
+                    NormalizedEmail = "john@example.com"
                 },
                 new User
                 {
                     Name = "Alice",
                     Surname = "Smith",
                     UserLogin = "Alice",
-                    EMail = "alice@example.com",
+                    Email = "alice@example.com",
                     Password = "password456",
                     Address = "456 Elm St",
                     TelephoneNumber = "456-789-0123",
                     KolvoZakazov = 0,
                     Rating = 4.0,
-                    MiddleName = "Marie"
+                    MiddleName = "Marie",
+                    NormalizedEmail = "alice@example.com"
                 }
             };
 

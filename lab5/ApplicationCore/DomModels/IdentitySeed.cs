@@ -45,13 +45,15 @@ namespace WebSheff.ApplicationCore.DomModels
                     Surname = adminSurname,
                     Name = adminName,
                     MiddleName = adminMiddleName,
+                    Email = adminEmail,
                     EMail = adminEmail,
                     Address = adminAddress,
                     TelephoneNumber = adminTelephoneNumber,
                     UserLogin = adminUserLogin,
                     UserName = adminUserLogin,
                     Password = adminPassword,
-                    PasswordConfirm = adminPassword
+                    PasswordConfirm = adminPassword,
+                    NormalizedEmail = adminEmail,
                 };
 
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
@@ -81,13 +83,15 @@ namespace WebSheff.ApplicationCore.DomModels
                     Surname = userSurname,
                     Name = userName,
                     MiddleName = userMiddleName,
+                    Email = userEmail,
                     EMail = userEmail,
                     Address = userAddress,
                     TelephoneNumber = userTelephoneNumber,
                     UserLogin = userLoginName,
                     UserName = userLoginName,
                     Password = userPassword,
-                    PasswordConfirm = userPassword
+                    PasswordConfirm = userPassword,
+                    NormalizedEmail = userEmail
                 };
 
                 IdentityResult result = await userManager.CreateAsync(user, userPassword);
