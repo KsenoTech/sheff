@@ -6,7 +6,7 @@ namespace WebSheff.ApplicationCore.DomModels
     {
         [Required]
         [Display(Name = "Логин")]
-        public string UserName { get; set; }
+        public string UserLogin { get; set; }
 
 
         [Required]

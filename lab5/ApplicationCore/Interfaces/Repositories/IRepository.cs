@@ -7,7 +7,5 @@
         bool Create(T item);
         bool Update(T item);
         bool Delete(int id);
-        T GetItem(string id);
-        bool Delete(string id);
     }
 }

@@ -38,7 +38,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 MiddleName = middlename,
                 EMail = email,
                 Password = password,
-                PasswordConfirm = password,
+                //PasswordConfirm = password,
                 Address = address,
                 TelephoneNumber = telephone,
                 ProvidedServices = new List<ProvidedService>(),
@@ -63,7 +63,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 ph.Surname = p.Surname;
                 ph.MiddleName = p.MiddleName;
                 ph.Password = p.Password;
-                ph.PasswordConfirm = p.PasswordConfirm;
+                //ph.PasswordConfirm = p.PasswordConfirm;
                 ph.Address = p.Address;
                 ph.EMail = p.EMail;
                 ph.TelephoneNumber = p.TelephoneNumber;

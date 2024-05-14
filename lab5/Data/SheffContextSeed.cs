@@ -10,7 +10,6 @@ namespace WebSheff.Data
             {
                 context.Database.EnsureCreated();
 
-                // Если в таблицах уже есть данные, то выходим context.Smeta.Any()
                 if (context.Useras.Any())
                 {
                     return;
@@ -29,18 +28,15 @@ namespace WebSheff.Data
                     await SeedProvidedServicesAsync(context);
                 }
 
-                if (context.ProvidedServices.Any())
+                if (context.Smeta.Any())
                 {
                     return;
                 }
                 else
                 {
-                    await SeedProvidedServicesAsync(context);
+                    await SeedSmetaAsync(context);
                 }
 
-
-
-                //await SeedSmetaAsync(context);
             }
             catch (Exception ex)
             {
@@ -57,28 +53,34 @@ namespace WebSheff.Data
                     Name = "John",
                     Surname = "Doe",
                     UserLogin =  "John",
+                    UserName =  "John",
                     Email = "john@example.com",
+                    EMail = "john@example.com",
                     Password = "password123",
                     Address = "123 Main St",
                     TelephoneNumber = "123-456-7890",
                     KolvoZakazov = 0,
                     Rating = 4.5,
                     MiddleName = "Middle",
-                    NormalizedEmail = "john@example.com"
+                    NormalizedEmail = "john@example.com",
+                    NormalizedUserName = "John".ToUpper()
                 },
                 new User
                 {
                     Name = "Alice",
                     Surname = "Smith",
                     UserLogin = "Alice",
-                    Email = "alice@example.com",
+                    UserName = "Alice",
+                    Email = "john@example.com",
+                    EMail = "alice@example.com",
                     Password = "password456",
                     Address = "456 Elm St",
                     TelephoneNumber = "456-789-0123",
                     KolvoZakazov = 0,
                     Rating = 4.0,
                     MiddleName = "Marie",
-                    NormalizedEmail = "alice@example.com"
+                    NormalizedEmail = "john@example.com",
+                    NormalizedUserName = "Alice".ToUpper()
                 }
             };
 
@@ -96,7 +98,7 @@ namespace WebSheff.Data
             {
                 new ProvidedService
                 {
-                    
+
                     Title = "Service 1",
                     Description = "Description for service 1",
                     CostOfM = 50,
@@ -104,7 +106,7 @@ namespace WebSheff.Data
                 },
                 new ProvidedService
                 {
-                    
+
                     Title = "Service 2",
                     Description = "Description for service 2",
                     CostOfM = 60,
@@ -125,7 +127,7 @@ namespace WebSheff.Data
             var smetas = new Smetum[]
             {
                 new Smetum
-                { 
+                {
                     TimeOrder = DateTime.Now,
                     GeneralBudget = 1000,
                     CanIdoIt = true,

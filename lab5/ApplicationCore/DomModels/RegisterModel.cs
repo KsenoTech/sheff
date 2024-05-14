@@ -30,7 +30,7 @@ namespace WebSheff.ApplicationCore.DomModels
 
         [Required(ErrorMessage = "Поле 'Логин' обязательно для заполнения")]
         [Display(Name = "Логин")]
-        public string UserName { get; set; }
+        public string UserLogin { get; set; }
 
 
 
@@ -42,10 +42,10 @@ namespace WebSheff.ApplicationCore.DomModels
 
 
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Подтвердить пароль")]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-        public string PasswordConfirm { get; set; }
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Подтвердить пароль")]
+        //[Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        //public string PasswordConfirm { get; set; }
 
 
 

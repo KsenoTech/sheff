@@ -52,8 +52,9 @@ namespace WebSheff.ApplicationCore.DomModels
                     UserLogin = adminUserLogin,
                     UserName = adminUserLogin,
                     Password = adminPassword,
-                    PasswordConfirm = adminPassword,
+                    //PasswordConfirm = adminPassword,
                     NormalizedEmail = adminEmail,
+                    NormalizedUserName = adminUserLogin.ToUpper()
                 };
 
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
@@ -90,8 +91,9 @@ namespace WebSheff.ApplicationCore.DomModels
                     UserLogin = userLoginName,
                     UserName = userLoginName,
                     Password = userPassword,
-                    PasswordConfirm = userPassword,
-                    NormalizedEmail = userEmail
+                    //PasswordConfirm = userPassword,
+                    NormalizedEmail = userEmail,
+                    NormalizedUserName = userLoginName.ToUpper()
                 };
 
                 IdentityResult result = await userManager.CreateAsync(user, userPassword);
