@@ -6,12 +6,12 @@ using WebSheff.ApplicationCore.DomModels;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using WebSheff.ApplicationCore.Interfaces.Services;
 using WebSheff.Infrastructure.BLL.Services;
+using WebSheff.ApplicationCore.Interfaces.Repositories;
+using WebSheff.Infrastructure.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler
-                                                                        = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddCors(options =>
 {
@@ -25,13 +25,18 @@ builder.Services.AddCors(options =>
 });
 
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddIdentity<User, IdentityRole>( options => {
         options.User.RequireUniqueEmail = true;
     }).AddEntityFrameworkStores<SheffContext>().AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<SheffContext>();
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler
+                                                                        = ReferenceHandler.IgnoreCycles);
+builder.Services.AddScoped<IDbRepository, DbRepository>();
 builder.Services.AddScoped<IProvidedServiceService, ProvidedServiceService>();
+builder.Services.AddScoped<ISmetaService, SmetaService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 builder.Services.AddLogging();

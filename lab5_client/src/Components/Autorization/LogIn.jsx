@@ -27,19 +27,19 @@ const LogIn = ({ user, setUser }) => {
   const logIn = async () => {
     try {
       const values = await form.validateFields(); // Проверяем валидность полей
-      const { userName, password } = values;
+      const { userLogin, password } = values;
 
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ userLogin, password }),
       };
 
       const response = await fetch("api/account/login", requestOptions);
       const data = await response.json();
 
-      if (response.status === 200 && data.userName) {
-        setUser({ isAuthenticated: true, userName: data.userName });
+      if (response.status === 200 && data.userLogin) {
+        setUser({ isAuthenticated: true, userLogin: data.userLogin });
         navigate("/");
       } else if (data.error) {
         setErrorMessages([data.error]);
@@ -76,7 +76,7 @@ const LogIn = ({ user, setUser }) => {
           >
             <Form.Item
               label="Логин"
-              name="userName"
+              name="userLogin"
               rules={[{ required: true, message: "Пожалуйста, введите логин!" }]}
             >
               <Input />

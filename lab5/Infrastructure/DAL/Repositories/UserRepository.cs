@@ -5,12 +5,12 @@ using WebSheff.Infrastructure.Extensions;
 
 namespace WebSheff.Infrastructure.DAL.Repositories
 {
-    public class UsersRepository : IRepository<User>
+    public class UserRepository : IRepository<User>
     {
         private SheffContext _dbcontext;
         private readonly ILogger _logger;
 
-        public UsersRepository(SheffContext dbcontext, ILogger logger)
+        public UserRepository(SheffContext dbcontext, ILogger logger)
         {
             _dbcontext = dbcontext;
             _logger = logger;

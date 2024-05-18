@@ -75,7 +75,18 @@ namespace WebSheff.Infrastructure.DAL.Repositories
 
         public List<ProvidedService> GetList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var OurService = _dbcontext.ProvidedServices.ToList();
+                _logger.LogExtension("Get OurService", OurService);
+
+                return OurService;
+            }
+            catch
+            {
+                _logger.LogExtension("Couldn`t get OurService", "", LogLevel.Error);
+                return null;
+            }
         }
 
         public bool Update(ProvidedService item)

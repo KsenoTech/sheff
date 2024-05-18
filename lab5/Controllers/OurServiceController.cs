@@ -2,31 +2,64 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebSheff.ApplicationCore.DomModels;
 using WebSheff.ApplicationCore.Interfaces.Services;
+using WebSheff.Infrastructure.Extensions;
 
 namespace WebSheff.Controllers
 {
-    [Route("api/[controller]")]
-    [EnableCors]
-    [ApiController]
+    [Produces("application/json")]
+    //[EnableCors]
+    //[ApiController]
     public class OurServicesController : Controller
     {
         private IProvidedServiceService _ourservices;
-        public OurServicesController(IProvidedServiceService ourService)
+        private readonly ILogger<OurServicesController> _logger;
+        public OurServicesController(IProvidedServiceService ourService, ILogger<OurServicesController> logger)
         {
             _ourservices = ourService;
+            _logger = logger;
         }
 
-        // GET: api/<OurServicesController>
-        [HttpGet("GetAllOurServices")]       
-        public async Task<ActionResult<IEnumerable<ProvidedService>>> GetAllServices()
+        [HttpGet]
+        [Route("api/ourservice/getall")]
+        public async Task<IActionResult> GetAllServices()
         {
-            return await Task.Run(_ourservices.GetAllProvidedServices);
+            try
+            {
+                var services = await Task.Run(() => _ourservices.GetAllProvidedServices());
+                if (services != null && services.Any())
+                {
+                    _logger.LogExtension("Retrieved all provided services");
+                    return Ok(new { message = "Услуги успешно получены", services });
+                }
+                else
+                {
+                    var errorMsg = new
+                    {
+                        message = "Услуги не найдены"
+                    };
+                    _logger.LogExtension("No services found");
+                    return NotFound(errorMsg);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogExtension("Error retrieving services", ex, LogLevel.Error);
+                var errorMsg = new
+                {
+                    message = "Ошибка при получении услуг",
+                    error = ex.Message
+                };
+                return StatusCode(StatusCodes.Status500InternalServerError, errorMsg);
+            }
         }
+
 
         // GET api/<OurServicesController>/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("api/ourservice/getone")]
         public async Task<ActionResult<ProvidedService>> GetService(int id)
         {
             var service = await Task.Run(() => _ourservices.GetProvidedService(id));
@@ -39,6 +72,7 @@ namespace WebSheff.Controllers
 
         // POST api/<OurServicesController>
         [HttpPost]
+        [Route("api/ourservice/createservice")]
         public async Task<ActionResult<ProvidedService>> PostService(ProvidedService serviceNew)
         {
             if (!ModelState.IsValid)
@@ -53,14 +87,15 @@ namespace WebSheff.Controllers
 
             if (serviceCreated)
             {
-                return CreatedAtAction("PostCar", new { id = serviceNew.Id }, serviceNew);
+                return CreatedAtAction("PostService", new { id = serviceNew.Id }, serviceNew);
             }
 
             return BadRequest();
         }
 
         // PUT api/<OurServicesController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("api/ourservice/updateservice")]
         public async Task<IActionResult> PutService(int id, ProvidedService service)
         {
             if (id != service.Id)
@@ -77,17 +112,40 @@ namespace WebSheff.Controllers
         }
 
         // DELETE api/<OurServicesController>/5
-        [HttpDelete("{id}")]
+        //[HttpDelete]
+        //[Route("api/ourservice/deleteservice")]
+        //public async Task<IActionResult> DeleteService(int id)
+        //{
+        //    var serviceDeleted = await Task.Run(() => _ourservices.DeleteProvidedService(id));
+
+        //    if (serviceDeleted)
+        //    {
+        //        return Ok();
+        //    }
+        //    return NotFound();
+        //}
+        [HttpDelete]
+        [Route("api/ourservice/deleteservice")]
         public async Task<IActionResult> DeleteService(int id)
         {
             var serviceDeleted = await Task.Run(() => _ourservices.DeleteProvidedService(id));
 
             if (serviceDeleted)
             {
+                _logger.LogExtension("Deleted provided service with id", id);
                 return Ok();
             }
-            return NotFound();
+            else
+            {
+                var errorMsg = new
+                {
+                    message = "Услуга не найдена или не удалось удалить"
+                };
+                _logger.LogExtension("Failed to delete provided service with id", id, LogLevel.Error);
+                return NotFound(errorMsg);
+            }
         }
+
 
     }
 }

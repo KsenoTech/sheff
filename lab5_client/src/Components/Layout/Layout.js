@@ -65,7 +65,7 @@ const Layout = ({ user }) => {
           )}
 
           {user.isAuthenticated && (
-            <span style={{ paddingRight: "20px" }}>{user.userName}</span>
+            <span style={{ paddingRight: "20px" }}>{user.userLogin}</span>
           )}
           {!user.isAuthenticated && <Link to="/login">Вход </Link>}
           {user.isAuthenticated && <Link to="/logoff">Выход </Link>}

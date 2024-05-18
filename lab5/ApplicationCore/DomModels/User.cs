@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebSheff.ApplicationCore.DomModels;
 
@@ -15,6 +16,7 @@ public partial class User : IdentityUser
 
     public string? MiddleName { get; set; }
 
+    [JsonPropertyName("user_email")]
     public string? EMail { get; set; }
 
     public string? Password { get; set; }

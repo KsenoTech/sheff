@@ -1,16 +1,19 @@
 ﻿using WebSheff.ApplicationCore.Interfaces.Repositories;
 using WebSheff.ApplicationCore.Interfaces.Services;
 using WebSheff.ApplicationCore.DomModels;
+using WebSheff.Controllers;
 
 namespace WebSheff.Infrastructure.BLL.Services
 {
     public class ProvidedServiceService : IProvidedServiceService
     {
-        private IDbRepository db;
+        private IDbRepository _db;
+        private readonly ILogger<AccountController> _logger;
 
-        public ProvidedServiceService(IDbRepository _db)
+        public ProvidedServiceService(IDbRepository data, ILogger<AccountController> logger)
         {
-            db = _db;
+            _db = data;
+            _logger = logger;
         }
 
         public bool CreateProvidedService(
@@ -19,7 +22,7 @@ namespace WebSheff.Infrastructure.BLL.Services
             int newcost_of_m, 
             int newcost_of_m2)
         {
-            var providedServiceCreated = db.ProvidedServices.Create(new ProvidedService()
+            var providedServiceCreated = _db.ProvidedServices.Create(new ProvidedService()
             {
                 Description = newdescription,
                 Title = newtitle,
@@ -36,11 +39,11 @@ namespace WebSheff.Infrastructure.BLL.Services
 
         public bool DeleteProvidedService(int id)
         {
-            ProvidedService p = db.ProvidedServices.GetItem(id);
+            ProvidedService p = _db.ProvidedServices.GetItem(id);
             if (p == null)
                 return false;
 
-            var psDeleted = db.ProvidedServices.Delete(p.Id);
+            var psDeleted = _db.ProvidedServices.Delete(p.Id);
             if (psDeleted)
             {
                 Save();
@@ -48,20 +51,44 @@ namespace WebSheff.Infrastructure.BLL.Services
             }
             return false;
         }
+        //public bool DeleteProvidedService(int id)
+        //{
+        //    try
+        //    {
+        //        ProvidedService p = _db.ProvidedServices.GetItem(id);
+
+        //        if (p == null)
+        //            return false;
+
+        //        var psDeleted = _db.ProvidedServices.Delete(p.Id);
+
+        //        if (psDeleted)
+        //        {
+        //            Save();
+        //            return true;
+        //        }
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Error deleting provided service with id {id}: {ex.Message}");
+        //        return false;
+        //    }
+        //}
 
         public List<ProvidedService> GetAllProvidedServices()
         {
-            return db.ProvidedServices.GetList();
+            return _db.ProvidedServices.GetList();
         }
 
         public ProvidedService GetProvidedService(int id)
         {
-            return db.ProvidedServices.GetItem(id);
+            return _db.ProvidedServices.GetItem(id);
         }
 
         public bool UpdateProvidedService(ProvidedService pold)
         {
-            ProvidedService phnew = db.ProvidedServices.GetItem(pold.Id);
+            ProvidedService phnew = _db.ProvidedServices.GetItem(pold.Id);
 
             if (phnew != null)
             {
@@ -71,7 +98,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 phnew.CostOfM = pold.CostOfM;
                 phnew.CostOfM2 = pold.CostOfM2;
 
-                if (db.ProvidedServices.Update(phnew))
+                if (_db.ProvidedServices.Update(phnew))
                 {
                     Save();
                     return true;
@@ -83,7 +110,7 @@ namespace WebSheff.Infrastructure.BLL.Services
 
         public bool Save()
         {
-            if (db.Save() > 0)
+            if (_db.Save() > 0)
                 return true;
             return false;
         }

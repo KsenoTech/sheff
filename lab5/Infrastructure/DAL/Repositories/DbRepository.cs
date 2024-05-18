@@ -9,7 +9,8 @@ namespace WebSheff.Infrastructure.DAL.Repositories
         private readonly ILogger<SheffContext> _logger;
 
         private ProvidedServiceRepository _ourServiceRepository;
-        private UsersRepository _usersRepository;
+        private UserRepository _usersRepository;
+        private SmetaRepository _smetaRepository;
 
         public DbRepository (SheffContext dbcontext, ILogger<SheffContext> logger)
         {
@@ -22,7 +23,7 @@ namespace WebSheff.Infrastructure.DAL.Repositories
             get
             {
                 if (_usersRepository == null)
-                    _usersRepository = new UsersRepository(_dbcontext, _logger);
+                    _usersRepository = new UserRepository(_dbcontext, _logger);
                 return _usersRepository;
             }
         }
@@ -49,13 +50,15 @@ namespace WebSheff.Infrastructure.DAL.Repositories
         {
             get
             {
-                throw new NotImplementedException();
+                if (_smetaRepository == null)
+                    _smetaRepository = new SmetaRepository(_dbcontext, _logger);
+                return _smetaRepository;
             }
         }
 
         public int Save()
         {
-            throw new NotImplementedException();
+            return _dbcontext.SaveChanges();
         }
     }
 }
