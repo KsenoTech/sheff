@@ -35,18 +35,18 @@ namespace WebSheff.Infrastructure.DAL.Repositories
         {
             try
             {
-                var userToRemove = _dbcontext.Useras.FirstOrDefault(c => c.Id == id);
+                var userToRemove = _dbcontext.ProvidedServices.FirstOrDefault(c => c.Id == id);
                 if (userToRemove != null)
                 {
-                    _dbcontext.Useras.Remove(userToRemove);
-                    _logger.LogExtension("Delete User", userToRemove);
+                    _dbcontext.ProvidedServices.Remove(userToRemove);
+                    _logger.LogExtension("Delete OurService", userToRemove);
                     return true;
                 }
                 throw new Exception();
             }
             catch
             {
-                _logger.LogExtension("Couldn`t delete User with id", id, LogLevel.Error);
+                _logger.LogExtension("Couldn`t delete OurService with id", id, LogLevel.Error);
                 return false;
             }
         }

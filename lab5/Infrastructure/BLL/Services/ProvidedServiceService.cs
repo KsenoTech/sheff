@@ -51,30 +51,6 @@ namespace WebSheff.Infrastructure.BLL.Services
             }
             return false;
         }
-        //public bool DeleteProvidedService(int id)
-        //{
-        //    try
-        //    {
-        //        ProvidedService p = _db.ProvidedServices.GetItem(id);
-
-        //        if (p == null)
-        //            return false;
-
-        //        var psDeleted = _db.ProvidedServices.Delete(p.Id);
-
-        //        if (psDeleted)
-        //        {
-        //            Save();
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Error deleting provided service with id {id}: {ex.Message}");
-        //        return false;
-        //    }
-        //}
 
         public List<ProvidedService> GetAllProvidedServices()
         {
