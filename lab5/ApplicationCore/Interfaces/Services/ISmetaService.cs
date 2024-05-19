@@ -8,11 +8,14 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// Создать заказ
         /// </summary>
         /// <returns></returns>
-        Smetum MakeSmeta(           
+        Smetum MakeSmeta(
            User client,
-           User executor,
-           ProvidedService providedService,
-           DateTime dataTime
+           DateTime? dataTime,
+           string? description,
+           int? generalBudget,
+           string? feedbackText,
+           bool? isItFinished,
+           bool? canIdoIt
            );
 
         /// <summary>

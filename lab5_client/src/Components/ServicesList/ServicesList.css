@@ -1,0 +1,21 @@
+.service-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  .services-list {
+    padding: 20px;
+  }
+  
+  .service-category {
+    margin-bottom: 40px;
+  }
+  
+  .service-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  

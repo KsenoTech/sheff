@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebSheff.ApplicationCore.DomModels;
 
@@ -11,9 +12,11 @@ using WebSheff.ApplicationCore.DomModels;
 namespace WebSheff.Migrations
 {
     [DbContext(typeof(SheffContext))]
-    partial class SheffContextModelSnapshot : ModelSnapshot
+    [Migration("20240519165722_smetExec")]
+    partial class smetExec
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,7 +267,7 @@ namespace WebSheff.Migrations
                         .HasColumnType("int")
                         .HasColumnName("general_budget");
 
-                    b.Property<int?>("IdClient")
+                    b.Property<int?>("IdExecutor")
                         .HasMaxLength(450)
                         .HasColumnType("int")
                         .HasColumnName("Id_executor");

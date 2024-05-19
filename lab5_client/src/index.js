@@ -12,6 +12,7 @@ import Layout from "./Components/Layout/Layout";
 import LogIn from "./Components/Autorization/LogIn";
 import LogOff from "./Components/Autorization/LogOff";
 import AboutUs from "./Components/AboutUs/AboutUs";
+import ServicesList from "./Components/ServicesList/ServicesList"; 
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -49,7 +50,14 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout user={user} />}>
-          
+        <Route
+            index
+            element={
+              <div className="wrapper">
+                <HomePage />
+              </div>
+            }
+          />
           <Route
             path="/HomePage"
             element={
@@ -58,6 +66,7 @@ const App = () => {
               </div>
             }
           />
+          <Route path="/ourservices" element={<ServicesList />} /> {/* Добавили новый маршрут */}
 
           <Route
             path="/users"

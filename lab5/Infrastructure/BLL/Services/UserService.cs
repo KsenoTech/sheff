@@ -44,7 +44,7 @@ namespace WebSheff.Infrastructure.BLL.Services
                 Address = address,
                 TelephoneNumber = telephone,
                 ProvidedServices = new List<ProvidedService>(),
-            }); ;
+            });
 
             if (employeeCreated)
             {

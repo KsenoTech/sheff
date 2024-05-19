@@ -65,7 +65,7 @@ const Layout = ({ user }) => {
           )}
 
           {user.isAuthenticated && (
-            <span style={{ paddingRight: "20px" }}>{user.userLogin}</span>
+            <span style={{ paddingRight: "20px" }}>{user.userName}</span>
           )}
           {!user.isAuthenticated && <Link to="/login">Вход </Link>}
           {user.isAuthenticated && <Link to="/logoff">Выход </Link>}
@@ -80,7 +80,7 @@ const Layout = ({ user }) => {
         <Outlet />
       </Content>
 
-      {!window.location.pathname.includes("/homepage") && (
+      {!(window.location.pathname === "/" || window.location.pathname.includes("/homepage")) && (
         <Footer style={{ textAlign: "center" }}>
           {new Date().getFullYear()} &copy; KLMych Team. Все права защищены.
         </Footer>

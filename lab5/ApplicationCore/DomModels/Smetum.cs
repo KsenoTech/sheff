@@ -7,7 +7,7 @@ public partial class Smetum
 {
     public int Id { get; set; }
 
-    public string? IdExecutor { get; set; }
+    public int? IdClient { get; set; }
 
     public string? Description { get; set; }
 

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebSheff.ApplicationCore.Interfaces.Services;
 using WebSheff.ApplicationCore.DomModels;
 using WebSheff.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebSheff.Controllers
 {
@@ -12,6 +14,7 @@ namespace WebSheff.Controllers
     public class SmetaController : Controller
     {
         private ISmetaService _smetaService;
+        private IUserService _userService;
         private readonly ILogger<SmetaController> _logger;
         public SmetaController(ISmetaService orderService, ILogger<SmetaController> logger)
         {
@@ -80,7 +83,7 @@ namespace WebSheff.Controllers
 
         // POST api/<SmetaController>
         [HttpPost]
-        [Route("api/smeta/updateone")]
+        [Route("api/smeta/createone")]
         public async Task<IActionResult> PostSmeta([FromBody] Smetum smeta)
         {
             if (!ModelState.IsValid)
@@ -92,9 +95,13 @@ namespace WebSheff.Controllers
             {
                 var smetaCreated = await Task.Run(() => _smetaService.MakeSmeta(
                 smeta.Client,
-                smeta.Executor,
-                smeta.SmProvidedService,
-                DateTime.Now));
+                smeta.TimeOrder,
+                smeta.Description,
+                smeta.GeneralBudget,
+                smeta.FeedbackText,
+                smeta.IsItFinished,
+                smeta.CanIdoIt
+                ));
 
                 if (smetaCreated != null)
                 {
@@ -116,5 +123,6 @@ namespace WebSheff.Controllers
             }
         }
 
+     
     }
 }

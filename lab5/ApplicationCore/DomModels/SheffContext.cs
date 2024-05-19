@@ -69,7 +69,7 @@ public partial class SheffContext : IdentityDbContext<User>
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.FeedbackText).HasColumnName("feedback_text");
             entity.Property(e => e.GeneralBudget).HasColumnName("general_budget");
-            entity.Property(e => e.IdExecutor)
+            entity.Property(e => e.IdClient)
                 .HasMaxLength(450)
                 .HasColumnName("Id_executor");
             entity.Property(e => e.TimeOrder)
