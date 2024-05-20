@@ -38,8 +38,8 @@ const LogIn = ({ user, setUser }) => {
       const response = await fetch("api/account/login", requestOptions);
       const data = await response.json();
 
-      if (response.status === 200 && data.userLogin) {
-        setUser({ isAuthenticated: true, userLogin: data.userLogin });
+      if (response.status === 200 && data.userName) {
+        setUser({ isAuthenticated: true, userName: data.userName });
         navigate("/");
       } else if (data.error) {
         setErrorMessages([data.error]);

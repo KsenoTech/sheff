@@ -70,7 +70,8 @@ const App = () => {
           />
           <Route path="/ourservices" element={<ServicesList />} /> {/* Добавили новый маршрут */}
           <Route path="/ourfaces" element={<OurFaces/>}/>
-          <Route path="/services" element={<CreateOrder/>}/>
+          <Route path="/services" element={<CreateOrder
+                                            user = {user}/>}/>
           <Route
             path="/users"
             element={
