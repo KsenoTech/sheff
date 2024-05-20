@@ -1,7 +1,9 @@
 import React from "react";
 import "./ServicesList.css";
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, isSelected, onSelect, isSelectionEnabled }) => {
+  const serviceClassName = isSelected && isSelectionEnabled ? "selected-service" : "service";
+
   // Отображаем стоимость в зависимости от наличия значений
   const costDisplay = () => {
     if (service.costOfM != null && service.costOfM2 == null) {
@@ -25,10 +27,12 @@ const ServiceCard = ({ service }) => {
   };
 
   return (
-    <div className="service-card">
-      <h3>{service.title}</h3>
-      <p>{service.description}</p>
-      {costDisplay()}
+    <div className={serviceClassName} onClick={() => onSelect(service.id)}>
+      <div className="service-card">
+        <h3>{service.title}</h3>
+        <p>{service.description}</p>
+        {costDisplay()}
+      </div>
     </div>
   );
 };

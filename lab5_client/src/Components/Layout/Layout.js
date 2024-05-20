@@ -32,7 +32,7 @@ const items = [
     key: "4",
   },
   // {
-  //   label: <Link to="/contacts">Контакты</Link>,
+  //   label: <Link to="/users">Контакты</Link>,
   //   key: "5",
   // },
   {

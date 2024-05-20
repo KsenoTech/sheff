@@ -44,3 +44,9 @@
   margin: 0 0 10px;
   color: #555;
 }
+
+.selected-service {
+  background-color: lightgreen;
+  border-radius: 5px;
+  /* Дополнительные стили, если необходимо */
+}

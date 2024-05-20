@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
 import "./ServicesList.css";
 
-const ServicesList = () => {
+const ServicesList = (props) => {
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedServices, setSelectedServices] = useState([]);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -29,6 +30,13 @@ const ServicesList = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleSelectService = (serviceId) => {
+    const updatedSelectedServices = selectedServices.includes(serviceId)
+      ? selectedServices.filter((id) => id !== serviceId)
+      : [...selectedServices, serviceId];
+    setSelectedServices(updatedSelectedServices);
+  };
+
   const filteredServices = services.filter(
     (service) =>
       service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -50,7 +58,13 @@ const ServicesList = () => {
       />
       <div className="service-cards">
         {filteredServices.map((service) => (
-          <ServiceCard key={service.Id} service={service} />
+          <ServiceCard
+            key={service.Id}
+            service={service}
+            isSelected={selectedServices.includes(service.id)}
+            onSelect={handleSelectService}
+            isSelectionEnabled={props.isSelectionEnabled ? true : false}
+          />
         ))}
       </div>
     </div>

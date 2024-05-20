@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Style.css";
 
-const User = ({user}) => {
-  const [users, setUsers] = useState({
-    isAuthenticated: false
-});
+const UserGet = ({user}) => {
+//   const [users, setUsers] = useState({
+//     isAuthenticated: false
+// });
+const [users, setUsers] = useState([]);
 
   useEffect(() => {
     updateUserWithProvidedServiceList();
@@ -109,6 +110,7 @@ const User = ({user}) => {
                           rating: parseFloat(userInputRating),
                           middleName: userInputMiddleName,
                           userName: userInputLogin,
+                          userLogin: userInputLogin,
                         };
                         updateItem(updatedUser);
                       } else {
@@ -204,4 +206,4 @@ const User = ({user}) => {
   );
 };
 
-export default User;
+export default UserGet;

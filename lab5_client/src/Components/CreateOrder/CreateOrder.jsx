@@ -11,9 +11,11 @@ const CreateOrder = ({ user }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [client, setClient] = useState("");
   const [description, setDescription] = useState("");
-  const [feedbackText, setFeedbackText] = useState("");
   const [generalBudget, setGeneralBudget] = useState(0);
   const navigate = useNavigate();
+
+  const [roomArea, setRoomArea] = useState(0);
+  const [ceilingHeight, setCeilingHeight] = useState(0);
 
   const showModal = () => {
     setOpen(true);
@@ -39,11 +41,16 @@ const CreateOrder = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Вычисление общей суммы бюджета
+    const totalBudget = selectedServices.reduce((acc, service) => {
+      // Помножим стоимость услуги на площадь комнаты и высоту потолков
+      return acc + service.cost * roomArea * ceilingHeight;
+    }, 0);
+
     const smeta = {
       client,
       description,
-      feedbackText,
-      generalBudget,
+      generalBudget: totalBudget,
       services: selectedServices.map((service) => service.id),
     };
 
@@ -62,9 +69,9 @@ const CreateOrder = ({ user }) => {
       alert("Смета успешно создана!");
       setClient("");
       setDescription("");
-      setFeedbackText("");
       setGeneralBudget(0);
       setSelectedServices([]);
+      setRoomArea(0);
       setOpen(false);
     } catch (error) {
       console.error("Error creating smeta:", error);
@@ -77,7 +84,7 @@ const CreateOrder = ({ user }) => {
       {user && user.isAuthenticated ? (
         <React.Fragment>
           <Modal
-            title="Создать Смету"
+            title={<div style={{ textAlign: 'center', fontSize: "20px" }}>Заказ на ремонт</div>}
             footer={null}
             open={open}
             onCancel={handleCancel}
@@ -88,8 +95,9 @@ const CreateOrder = ({ user }) => {
                 <label>Клиент: </label>
                 <Input
                   type="text"
-                  value={client}
+                  value={user.smeta}
                   onChange={(e) => setClient(e.target.value)}
+                  defaultValue={user.userName}
                   required
                 />
 
@@ -101,11 +109,19 @@ const CreateOrder = ({ user }) => {
                   required
                 />
 
-                <label>Отзыв: </label>
+                <label>Площадь комнаты (м²):</label>
                 <Input
-                  type="text"
-                  value={feedbackText}
-                  onChange={(e) => setFeedbackText(e.target.value)}
+                  type="number"
+                  value={roomArea}
+                  onChange={(e) => setRoomArea(e.target.value)}
+                  required
+                />
+
+                <label>Высота потолков (м):</label>
+                <Input
+                  type="number"
+                  value={ceilingHeight}
+                  onChange={(e) => setCeilingHeight(e.target.value)}
                   required
                 />
 
@@ -117,7 +133,8 @@ const CreateOrder = ({ user }) => {
                   required
                 />
 
-                <ServicesList onSelectService={handleServiceSelection} />
+                <ServicesList onSelectService={handleServiceSelection}
+                 isSelectionEnabled={true} />
 
                 {errorMessage && <Alert message={errorMessage} type="error" />}
 
@@ -128,7 +145,18 @@ const CreateOrder = ({ user }) => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <h3>Сударь, не предложить ли Вам залогиниться?</h3>
+          <div
+            style={{
+              textAlign: "center",
+              padding: "20px",
+              backgroundColor: "#f0f0f0",
+              borderRadius: "5px",
+            }}
+          >
+            <h3 style={{ color: "#083B5B" }}>
+              Сударь, не предложить ли Вам залогиниться?
+            </h3>
+          </div>
         </React.Fragment>
       )}
     </React.Fragment>

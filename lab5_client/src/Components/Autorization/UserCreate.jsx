@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
  import { useNavigate } from "react-router-dom";
 import { Button, Form, Input, Modal, Alert } from "antd";
 
-const UserCreate = ({ addUser }) => {
+const UserCreate = ({ user, addUser }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
    const [open, setOpen] = useState(false); //стейт для хранения состояния объекта открытия окна
@@ -57,9 +57,11 @@ const UserCreate = ({ addUser }) => {
       e.target.reset(); // Очистить форму после успешной отправки
       setSuccess(true); // Устанавливаем состояние успешной регистрации
       setOpen(false); // Закрываем модальное окно
+      window.location.href = '/';
     } catch (error) {
       console.error("Error creating user:", error);
       setFailed(true); // Устанавливаем состояние неудачной регистрации
+      setErrorMessage("Ошибка при создании пользователя");
     }
   };
   
@@ -91,7 +93,7 @@ const UserCreate = ({ addUser }) => {
         <label>Логин: </label>
         <input
           type="text"
-          name="userName"
+          name="userLogin"
           placeholder="iVan1234"
           required
         />
@@ -133,6 +135,9 @@ const UserCreate = ({ addUser }) => {
         />
 
  {errorMessage && <div className="error-message">{errorMessage}</div>}
+ {registerSuccess && (
+            <Alert message="Регистрация успешна" type="success" />
+          )}
         <button type="submit">Создать</button>
       </form>
     </div>

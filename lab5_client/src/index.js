@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./Components/HomePage/HomePage";
-import User from "./Components/User/User";
+import UserGet from "./Components/User/User";
 import UserCreate from "./Components/Autorization/UserCreate";
 import Layout from "./Components/Layout/Layout";
 import LogIn from "./Components/Autorization/LogIn";
@@ -76,7 +76,7 @@ const App = () => {
             path="/users"
             element={
               <div>
-                <User
+                <UserGet
                   user={user}
                   users={users}
                   setUsers={setUsers}
