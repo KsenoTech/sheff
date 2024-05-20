@@ -1,0 +1,80 @@
+.our-faces {
+    padding-top: 60px;
+    padding-bottom: 120px;
+    text-align: center;
+  }
+  
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section-topwrapper {
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #083B5B; /* Цвет заголовка */
+  }
+  
+  .section-descr {
+    font-size: 18px;
+    color: #555;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  .team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .team-item {
+    flex: 1 1 calc(25% - 32px); /* Adjust the size as needed */
+    max-width: 260px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  
+  .team-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .item-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item-bgimg {
+    width: 100%;
+    padding-bottom: 100%; /* Makes it a square */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .item-info {
+    padding: 16px;
+  }
+  
+  .item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .item-title {
+    font-size: 16px;
+    color: #555;
+  }
+  

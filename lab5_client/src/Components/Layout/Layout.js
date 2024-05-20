@@ -31,10 +31,10 @@ const items = [
     label: <Link to="/ourfaces">Наши лица</Link>,
     key: "4",
   },
-  {
-    label: <Link to="/contacts">Контакты</Link>,
-    key: "5",
-  },
+  // {
+  //   label: <Link to="/contacts">Контакты</Link>,
+  //   key: "5",
+  // },
   {
     label: <Link to="/aboutus">О нас</Link>,
     key: "6",

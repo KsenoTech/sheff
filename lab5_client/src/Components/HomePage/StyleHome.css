@@ -1,25 +1,16 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* Убираем скролл */
-  font-family: 'Playfair', serif; 
-}
-
-.custom-component {
+.home-page {
   position: relative;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%; /* Обеспечиваем, чтобы компонент занимал всю высоту */
+  overflow: hidden; /* Убираем скролл */
+  font-family: 'Playfair', serif;
 }
 
 .background-image {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%; /* Обеспечиваем, чтобы фон занимал всю высоту */
   width: 100%;
   height: 100vh;
   background-size: cover;

@@ -13,6 +13,8 @@ import LogIn from "./Components/Autorization/LogIn";
 import LogOff from "./Components/Autorization/LogOff";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import ServicesList from "./Components/ServicesList/ServicesList"; 
+import OurFaces from "./Components/OurFaces/OurFaces"; 
+import CreateOrder from "./Components/CreateOrder/CreateOrder"; 
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -67,7 +69,8 @@ const App = () => {
             }
           />
           <Route path="/ourservices" element={<ServicesList />} /> {/* Добавили новый маршрут */}
-
+          <Route path="/ourfaces" element={<OurFaces/>}/>
+          <Route path="/services" element={<CreateOrder/>}/>
           <Route
             path="/users"
             element={

@@ -5,6 +5,7 @@ import "./ServicesList.css";
 const ServicesList = () => {
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -24,13 +25,15 @@ const ServicesList = () => {
     fetchServices();
   }, []);
 
-  const groupedServices = services.reduce((acc, service) => {
-    if (!acc[service.Title]) {
-      acc[service.Title] = [];
-    }
-    acc[service.Title].push(service);
-    return acc;
-  }, {});
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredServices = services.filter(
+    (service) =>
+      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (error) {
     return <div>{error}</div>;
@@ -38,16 +41,18 @@ const ServicesList = () => {
 
   return (
     <div className="services-list">
-      {Object.keys(groupedServices).map((title) => (
-        <div key={title} className="service-category">
-          <h2>{title}</h2>
-          <div className="service-cards">
-            {groupedServices[title].map((service) => (
-              <ServiceCard key={service.Id} service={service} />
-            ))}
-          </div>
-        </div>
-      ))}
+      <input
+        type="text"
+        placeholder="Поиск..."
+        value={searchTerm}
+        onChange={handleSearch}
+        className="search-input"
+      />
+      <div className="service-cards">
+        {filteredServices.map((service) => (
+          <ServiceCard key={service.Id} service={service} />
+        ))}
+      </div>
     </div>
   );
 };

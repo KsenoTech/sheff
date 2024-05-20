@@ -5,9 +5,9 @@ const ServiceCard = ({ service }) => {
   // Отображаем стоимость в зависимости от наличия значений
   const costDisplay = () => {
     if (service.costOfM != null && service.costOfM2 == null) {
-      return <p>Стоимость: {service.costOfM} руб.</p>;
+      return <p>Стоимость за м: {service.costOfM} руб.</p>;
     } else if (service.costOfM == null && service.costOfM2 != null) {
-      return <p>Стоимость: {service.costOfM2} руб.</p>;
+      return <p>Стоимость за м²: {service.costOfM2} руб.</p>;
     } else if (service.costOfM != null && service.costOfM2 != null) {
       if (service.costOfM === service.costOfM2) {
         return <p>Стоимость: {service.costOfM} руб.</p>;
