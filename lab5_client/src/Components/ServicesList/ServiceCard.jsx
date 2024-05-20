@@ -27,7 +27,7 @@ const ServiceCard = ({ service, isSelected, onSelect, isSelectionEnabled }) => {
   };
 
   return (
-    <div className={serviceClassName} onClick={() => onSelect(service.id)}>
+    <div className={serviceClassName} onClick={() => onSelect(service)}>
       <div className="service-card">
         <h3>{service.title}</h3>
         <p>{service.description}</p>

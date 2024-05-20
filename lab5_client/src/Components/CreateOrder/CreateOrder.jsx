@@ -31,26 +31,28 @@ const CreateOrder = ({ user }) => {
   };
 
   const handleServiceSelection = (service, isSelected) => {
-    if (isSelected) {
-      setSelectedServices([...selectedServices, service]);
-    } else {
-      setSelectedServices(selectedServices.filter((s) => s.id !== service.id));
-    }
+    const updatedSelectedServices = isSelected
+      ? [...selectedServices, service]
+      : selectedServices.filter((s) => s.id !== service.id);
+
+    setSelectedServices(updatedSelectedServices);
+
+    // Вычисление общей суммы бюджета
+    const totalBudget = updatedSelectedServices.reduce((acc, s) => {
+      const cost = s.costOfM2 ?? s.costOfM;
+      return acc + (cost * roomArea * ceilingHeight);
+    }, 0);
+    setGeneralBudget(totalBudget);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Вычисление общей суммы бюджета
-    const totalBudget = selectedServices.reduce((acc, service) => {
-      // Помножим стоимость услуги на площадь комнаты и высоту потолков
-      return acc + service.cost * roomArea * ceilingHeight;
-    }, 0);
 
     const smeta = {
       client,
       description,
-      generalBudget: totalBudget,
+      generalBudget,
       services: selectedServices.map((service) => service.id),
     };
 
@@ -71,6 +73,7 @@ const CreateOrder = ({ user }) => {
       setDescription("");
       setGeneralBudget(0);
       setSelectedServices([]);
+      setCeilingHeight(0);
       setRoomArea(0);
       setOpen(false);
     } catch (error) {
@@ -113,7 +116,7 @@ const CreateOrder = ({ user }) => {
                 <Input
                   type="number"
                   value={roomArea}
-                  onChange={(e) => setRoomArea(e.target.value)}
+                  onChange={(e) => setRoomArea(Number(e.target.value))}
                   required
                 />
 
@@ -121,7 +124,7 @@ const CreateOrder = ({ user }) => {
                 <Input
                   type="number"
                   value={ceilingHeight}
-                  onChange={(e) => setCeilingHeight(e.target.value)}
+                  onChange={(e) => setCeilingHeight(Number(e.target.value))}
                   required
                 />
 
@@ -129,7 +132,7 @@ const CreateOrder = ({ user }) => {
                 <Input
                   type="number"
                   value={generalBudget}
-                  onChange={(e) => setGeneralBudget(e.target.value)}
+                  onChange={(e) => setGeneralBudget(Number(e.target.value))}
                   required
                 />
 

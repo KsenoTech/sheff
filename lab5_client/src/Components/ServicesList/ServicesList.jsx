@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
 import "./ServicesList.css";
 
-const ServicesList = (props) => {
+const ServicesList = ({onSelectService, isSelectionEnabled }) => {
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,11 +30,9 @@ const ServicesList = (props) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSelectService = (serviceId) => {
-    const updatedSelectedServices = selectedServices.includes(serviceId)
-      ? selectedServices.filter((id) => id !== serviceId)
-      : [...selectedServices, serviceId];
-    setSelectedServices(updatedSelectedServices);
+  const handleSelectService = (service) => {
+    const isSelected = selectedServices.some((s) => s.id === service.id);
+    onSelectService(service, !isSelected);
   };
 
   const filteredServices = services.filter(
@@ -59,11 +57,11 @@ const ServicesList = (props) => {
       <div className="service-cards">
         {filteredServices.map((service) => (
           <ServiceCard
-            key={service.Id}
+            key={service.id}
             service={service}
-            isSelected={selectedServices.includes(service.id)}
+            isSelected={selectedServices.some((s) => s.id === service.id)}
             onSelect={handleSelectService}
-            isSelectionEnabled={props.isSelectionEnabled ? true : false}
+            isSelectionEnabled={isSelectionEnabled}
           />
         ))}
       </div>
