@@ -32,7 +32,15 @@ const ServicesList = ({onSelectService, isSelectionEnabled }) => {
 
   const handleSelectService = (service) => {
     const isSelected = selectedServices.some((s) => s.id === service.id);
-    onSelectService(service, !isSelected);
+    if (isSelectionEnabled) {
+      const updatedSelectedServices = isSelected
+        ? selectedServices.filter((s) => s.id !== service.id)
+        : [...selectedServices, service];
+      setSelectedServices(updatedSelectedServices);
+      onSelectService(service, !isSelected);
+    } else {
+      onSelectService(service, isSelected);
+    }
   };
 
   const filteredServices = services.filter(
