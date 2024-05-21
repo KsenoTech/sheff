@@ -9,13 +9,10 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Smetum MakeSmeta(
-           User client,
-           DateTime? dataTime,
+           int Idclient,
+           
            string? description,
-           int? generalBudget,
-           string? feedbackText,
-           bool? isItFinished,
-           bool? canIdoIt
+           int? generalBudget
            );
 
         /// <summary>
@@ -30,5 +27,6 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// <param name="id"></param>
         /// <returns></returns>
         Smetum GetSmeta(int id);
+        void MakeSmeta(string? idClient, string? description, int? generalBudget);
     }
 }

@@ -28,17 +28,14 @@ namespace WebSheff.Infrastructure.BLL.Services
         }
 
         public Smetum MakeSmeta(
-            User client,
-            DateTime? dataTime,
+            string? Idсlient,
+            
             string? description,
-            int? generalBudget,
-            string? feedbackText,
-            bool? isItFinished,
-            bool? canIdoIt
+            int? generalBudget
             )
         {
             #region Проверка
-            var clientnew = _clientservice.GetUser(client.Id);
+            var clientnew = _clientservice.GetUser(Idсlient);
             if (clientnew == null)
             {
                 return null;
@@ -47,13 +44,9 @@ namespace WebSheff.Infrastructure.BLL.Services
 
             Smetum smeta = new Smetum()
             {
-                IdClient = client.Id,
+                IdClient = Idсlient,
                 Description = description,
-                TimeOrder = dataTime,
-                GeneralBudget = generalBudget,
-                FeedbackText = feedbackText,
-                IsItFinished = null,
-                CanIdoIt = null
+                GeneralBudget = generalBudget
             };
 
             var smetaCreated = db.Smetas.Create(smeta);

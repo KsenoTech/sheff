@@ -39,7 +39,7 @@ const LogIn = ({ user, setUser }) => {
       const data = await response.json();
 
       if (response.status === 200 && data.userName) {
-        setUser({ isAuthenticated: true, userName: data.userName });
+        setUser({ isAuthenticated: true, userName: data.userName, userId: data.userId });
         navigate("/");
       } else if (data.error) {
         setErrorMessages([data.error]);

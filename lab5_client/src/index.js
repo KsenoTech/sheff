@@ -21,14 +21,14 @@ const App = () => {
   const addUser = (user) => setUsers([...users, user]);
   const removeUser = (removeId) =>
     setUsers(users.filter(({ userId }) => userId !== removeId));
-  const [user, setUser] = useState({ isAuthenticated: false, userName: "" });
+  const [user, setUser] = useState({ isAuthenticated: false, userName: "", userId: "" });
 
   useEffect(() => {
     const getUser = async () => {
       return await fetch("api/account/isauthenticated")
         .then((response) => {
           response.status === 401 &&
-            setUser({ isAuthenticated: false, userName: "" });
+            setUser({ isAuthenticated: false, userName: "", userId: "" });
           return response.json();
         })
         .then(
@@ -37,7 +37,7 @@ const App = () => {
               typeof data !== "undefined" &&
               typeof data.userName !== "undefined"
             ) {
-              setUser({ isAuthenticated: true, userName: data.userName });
+              setUser({ isAuthenticated: true, userName: data.userName, userId: data.userId });
             }
           },
           (error) => {

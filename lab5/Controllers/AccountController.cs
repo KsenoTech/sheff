@@ -102,7 +102,7 @@ namespace WebSheff.Controllers
                     IList<string>? roles = await _userManager.GetRolesAsync(user);
                     string? userRole = roles.FirstOrDefault();
                     _logger.LogExtension("Entered User", user);
-                    return Ok(new { message = "Выполнен вход", userName = model.UserLogin, userRole });
+                    return Ok(new { message = "Выполнен вход", userName = model.UserLogin, userRole, userId = ((Microsoft.AspNetCore.Identity.IdentityUser<string>)user).Id });
                 }
                 else
                 {
@@ -161,7 +161,7 @@ namespace WebSheff.Controllers
             IList<string> roles = await _userManager.GetRolesAsync(usr);
             string? userRole = roles.FirstOrDefault();
             _logger.LogExtension("Session activated for", usr);
-            return Ok(new { message = "Сессия активна", userName = usr.UserLogin, userRole });
+            return Ok(new { message = "Сессия активна", userName = usr.UserLogin, userRole, userId = ((Microsoft.AspNetCore.Identity.IdentityUser<string>)usr).Id });
 
         }
         private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);

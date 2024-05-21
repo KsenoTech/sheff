@@ -84,7 +84,7 @@ namespace WebSheff.Controllers
         // POST api/<SmetaController>
         [HttpPost]
         [Route("api/smeta/createone")]
-        public async Task<IActionResult> PostSmeta([FromBody] Smetum smeta)
+        public async Task<IActionResult> PostSmeta([FromBody] SmetaDTO smeta)
         {
             if (!ModelState.IsValid)
             {
@@ -94,13 +94,10 @@ namespace WebSheff.Controllers
             try
             {
                 var smetaCreated = await Task.Run(() => _smetaService.MakeSmeta(
-                smeta.Client,
-                smeta.TimeOrder,
+                smeta.IdClient,
+                
                 smeta.Description,
-                smeta.GeneralBudget,
-                smeta.FeedbackText,
-                smeta.IsItFinished,
-                smeta.CanIdoIt
+                smeta.GeneralBudget
                 ));
 
                 if (smetaCreated != null)

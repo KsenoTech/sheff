@@ -9,7 +9,7 @@ const CreateOrder = ({ user }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [client, setClient] = useState("");
+  const [IdClient, setClient] = useState("");
   const [description, setDescription] = useState("");
   const [generalBudget, setGeneralBudget] = useState(0);
   const navigate = useNavigate();
@@ -40,21 +40,20 @@ const CreateOrder = ({ user }) => {
     // Вычисление общей суммы бюджета
     const totalBudget = updatedSelectedServices.reduce((acc, s) => {
       const cost = s.costOfM2 ?? s.costOfM;
-      return acc + (cost * roomArea * ceilingHeight);
+      return acc + cost * roomArea * ceilingHeight;
     }, 0);
     setGeneralBudget(totalBudget);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
+    // e.preventDefault();
     const smeta = {
-      client,
-      description,
-      generalBudget,
-      services: selectedServices.map((service) => service.id),
+      IdClient: user.userId,
+      description: e.description,
+      generalBudget: generalBudget,
     };
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
+    console.log(smeta);
 
     const requestOptions = {
       method: "POST",
@@ -87,46 +86,75 @@ const CreateOrder = ({ user }) => {
       {user && user.isAuthenticated ? (
         <React.Fragment>
           <Modal
-            title={<div style={{ textAlign: 'center', fontSize: "20px" }}>Заказ на ремонт</div>}
+            title={
+              <div style={{ textAlign: "center", fontSize: "20px" }}>
+                Заказ на ремонт
+              </div>
+            }
             footer={null}
             open={open}
             onCancel={handleCancel}
             destroyOnClose={true}
           >
             <div className="create-smeta-container">
-              <form onSubmit={handleSubmit} className="create-smeta-form">
+              <Form onFinish={handleSubmit} className="create-smeta-form">
+                
+                {/* <Form.Item
+                  label="Клиент"
+                  name="client"
+                  rules={[{ required: true }]}
+                >
+                  <Input
+                    type="text"
+                    value={user.userName}
+                    onChange={(e) => setClient(e.target.value)}
+                  />
+                </Form.Item> */}
+
                 <label>Клиент: </label>
                 <Input
                   type="text"
-                  value={user.smeta}
+                  value={user.userId}
                   onChange={(e) => setClient(e.target.value)}
                   defaultValue={user.userName}
                   required
                 />
 
-                <label>Описание: </label>
-                <Input
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
+                <Form.Item
+                  label="Описание"
+                  name="description"
+                  rules={[{ required: true }]}
+                >
+                  <Input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </Form.Item>
 
-                <label>Площадь комнаты (м²):</label>
-                <Input
-                  type="number"
-                  value={roomArea}
-                  onChange={(e) => setRoomArea(Number(e.target.value))}
-                  required
-                />
+                <Form.Item
+                  label="Площадь комнаты (м²)"
+                  name="roomArea"
+                  rules={[{ required: true }]}
+                >
+                  <Input
+                    type="number"
+                    value={roomArea}
+                    onChange={(e) => setRoomArea(Number(e.target.value))}
+                  />
+                </Form.Item>
 
-                <label>Высота потолков (м):</label>
-                <Input
-                  type="number"
-                  value={ceilingHeight}
-                  onChange={(e) => setCeilingHeight(Number(e.target.value))}
-                  required
-                />
+                <Form.Item
+                  label="Высота потолков (м)"
+                  name="ceilingHeight"
+                  rules={[{ required: true }]}
+                >
+                  <Input
+                    type="number"
+                    value={ceilingHeight}
+                    onChange={(e) => setCeilingHeight(Number(e.target.value))}
+                  />
+                </Form.Item>
 
                 <label>Общий бюджет: </label>
                 <Input
@@ -136,13 +164,18 @@ const CreateOrder = ({ user }) => {
                   required
                 />
 
-                <ServicesList onSelectService={handleServiceSelection}
-                 isSelectionEnabled={true} />
+                <ServicesList
+                  onSelectService={handleServiceSelection}
+                  isSelectionEnabled={true}
+                />
 
                 {errorMessage && <Alert message={errorMessage} type="error" />}
-
-                <Button type="submit">Создать</Button>
-              </form>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Создать
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
           </Modal>
         </React.Fragment>
