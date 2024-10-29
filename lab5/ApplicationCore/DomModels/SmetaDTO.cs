@@ -2,7 +2,7 @@
 {
     public partial class SmetaDTO
     {
-        public string? IdClient { get; set; }
+        public int IdClient { get; set; }
 
         public string? Description { get; set; }
 

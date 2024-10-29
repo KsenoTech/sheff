@@ -27,6 +27,6 @@ namespace WebSheff.ApplicationCore.Interfaces.Services
         /// <param name="id"></param>
         /// <returns></returns>
         Smetum GetSmeta(int id);
-        void MakeSmeta(string? idClient, string? description, int? generalBudget);
+        
     }
 }

@@ -28,7 +28,7 @@ namespace WebSheff.Infrastructure.BLL.Services
         }
 
         public Smetum MakeSmeta(
-            string? Idсlient,
+            int Idсlient,
             
             string? description,
             int? generalBudget
