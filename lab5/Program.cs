@@ -1,9 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using WebSheff.Data;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using WebSheff.ApplicationCore.DomModels;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using WebSheff.ApplicationCore.Interfaces.Services;
 using WebSheff.Infrastructure.BLL.Services;
 using WebSheff.ApplicationCore.Interfaces.Repositories;
@@ -27,7 +25,7 @@ builder.Services.AddCors(options =>
 
 // Add services to the container
 builder.Services.AddIdentity<User, IdentityRole>( options => {
-        options.User.RequireUniqueEmail = true;
+options.User.RequireUniqueEmail = true;
     }).AddEntityFrameworkStores<SheffContext>().AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<SheffContext>();
@@ -79,6 +77,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 var app = builder.Build();
+
 using (var scope = app.Services.CreateScope())
 {
     var sheffContext = scope.ServiceProvider.GetRequiredService<SheffContext>();
@@ -100,7 +99,6 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Logger.LogInformation("Starting the app");

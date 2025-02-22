@@ -70,28 +70,49 @@ namespace WebSheff.Controllers
             return Ok(service);
         }
 
+
         // POST api/<OurServicesController>
         [HttpPost]
         [Route("api/ourservice/createservice")]
         public async Task<ActionResult<ProvidedService>> PostService(ProvidedService serviceNew)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var serviceCreated = await Task.Run(() => _ourservices.CreateProvidedService(
-                serviceNew.Description,
-                serviceNew.Title,
-                serviceNew.CostOfM ?? 0,
-                serviceNew.CostOfM2 ?? 0));
 
-            if (serviceCreated)
+            try
             {
-                return CreatedAtAction("PostService", new { id = serviceNew.Id }, serviceNew);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-            return BadRequest();
+                var serviceCreated = await Task.Run(() => _ourservices.CreateProvidedService(
+                    serviceNew.Description,
+                    serviceNew.Title,
+                    serviceNew.CostOfM ?? 0,
+                    serviceNew.CostOfM2 ?? 0));
+
+                if (serviceCreated)
+                {
+                    return CreatedAtAction("PostService", new { id = serviceNew.Id }, serviceNew);
+                }
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                var errorMsg = new
+                {
+                    message = "Ошибка при создании администратора",
+                    error = ex.Message
+                };
+                return StatusCode(StatusCodes.Status500InternalServerError, errorMsg);
+            }
         }
+        
 
         // PUT api/<OurServicesController>/5
         [HttpPut]
